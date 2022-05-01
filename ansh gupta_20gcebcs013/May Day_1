@@ -1,3 +1,47 @@
-/*
-  MY Day_1 CODE WILL BE PRESENT HERE.
-*/
+// MY Day_1 CODE WILL IS PRESENT HERE.
+
+/*************************************************************backspace-string-compare.cpp****************************************************************************/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    bool backspaceCompare(string s, string t) 
+    {
+    	string s1 = "", s2 = "";
+    	for(int i = 0; i < s.size(); i++)
+    	{
+    		if(s[i] == '#')
+    			s1 = s1.substr(0, s1.size()-1);
+    		else
+    			s1 += s[i];
+    	}
+    	for(int i = 0; i < t.size(); i++)
+    	{
+    		if(t[i] == '#')
+    			s2 = s2.substr(0, s2.size()-1);
+    		else
+    			s2 += t[i];
+    	}
+       	return (s1 == s2 ? true : false);
+    }
+};
+
+/*include this section if running on LEETCODE IDE.*/
+int main()
+{
+	int t = 0;
+	cin>>t;
+	while(t--)
+	{
+		string s = " ", t = " ";
+		cin>>s>>t;
+		Solution ob;
+		if(ob.backspaceCompare(s, t))
+			cout << "true\n";
+		else
+			cout << "false\n";
+	}
+	return 0;
+}
