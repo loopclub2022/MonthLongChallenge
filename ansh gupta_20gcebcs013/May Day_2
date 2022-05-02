@@ -1,0 +1,49 @@
+// MY DAY 2 CODE IS PRESENT HERE.
+
+/*********************************************************************sort-array-by-parity.cpp************************************************************************/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+     vector<int> sortArrayByParity(vector<int>& nums) {
+    	int low = 0, high = nums.size()-1;
+    	while(low < high)
+    	{
+    		if(nums[low]%2 != 0  &&  nums[high]%2 == 0)
+    			swap(nums[low], nums[high]);
+    		else if(nums[low]%2 != 0  &&  nums[high]%2 != 0)
+    			high--;
+    		else if(nums[low]%2 == 0  &&  nums[high]%2 == 0)
+    			low++;
+    		else
+    		{
+    			low++;
+    			high--;
+    		}
+    	}
+    	return nums;	
+    }
+};
+
+
+/* Do not include below module if running on LeetCode IDE */
+int main()
+{
+	int t = 0;
+	cin>>t;
+	while(t--)
+	{
+		int n = 0;
+		cin>>n;
+		vector<int> nums(n, 0);
+		for(int i = 0; i < n; i++)
+			cin>>nums[i];
+		Solution ob;
+		nums = ob.sortArrayByParity(nums);
+		for(auto x : nums) cout<<x<<" ";
+		cout << "\n";
+	}
+	return 0;
+}
