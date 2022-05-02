@@ -1,3 +1,6 @@
+# Link For Problem: https://leetcode.com/problems/backspace-string-compare/
+
+
 class Solution:
 
     def getNextValidIndex(self, s: str, idx: int) -> int:
