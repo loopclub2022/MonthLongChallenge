@@ -1,0 +1,26 @@
+class Solution
+{
+    public int[] sortArrayByParity(int[] nums)
+    {
+        int a[] = new int[nums.length], e=0,o=0,j,i;
+        for( i=0;i<nums.length;i++)
+    {
+        if(nums[i]%2==0)
+        e++;
+    }
+        o=e;
+        e=0;
+        for( j=0;j<nums.length;j++)
+        {
+         if(nums[j]%2==0)
+         {  if(e<nums.length)
+             a[e++]= nums[j];
+         }
+         else
+         {if(o<nums.length) 
+             a[o++] = nums[j];
+        }
+        }
+    return a; }
+    
+}
