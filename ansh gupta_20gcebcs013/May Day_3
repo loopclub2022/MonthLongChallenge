@@ -1,0 +1,58 @@
+// MY DAY 3 CODE IS PRESENT HERE.
+
+/****************************************************************shortest-unsorted_continuous_subarray.cpp************************************************************/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution
+{
+public:
+	int solve(vector<int> nums)
+	{
+		vector<int> c_nums = nums;
+		int length = 0, counter = 0;
+		bool flag = false;
+		sort(c_nums.begin(), c_nums.end());
+		for(int i = 0; i < nums.size(); i++)
+		{
+			if(c_nums[i] == nums[i])
+			{
+				if(length == 0)
+					flag = false;
+				else
+				{
+					flag = true;
+					counter++;
+				}
+			}
+			else
+			{
+				length = flag == true ? length + counter + 1 : length + 1;
+				flag = false;
+				counter = 0;
+			}
+		}
+		return length;
+	}
+};
+
+/*Don't include this section if running on LeetCode IDE.*/
+
+int main()
+{
+	int t;
+	cin >> t;
+	while(t--)
+	{
+		int n = 0;
+		cin>>n;
+		vector<int> nums(n, 0);
+		for(int i = 0; i < n; i++)
+			cin>>nums[i];
+		Solution obj;
+		cout<<obj.solve(nums);
+		cout << "\n";
+	} 
+	return 0;
+}
