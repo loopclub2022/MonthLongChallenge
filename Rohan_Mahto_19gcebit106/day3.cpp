@@ -3,7 +3,10 @@ for example
  consider an array [2,4,3,6,5,7]
  find out the left max->[2,4,4,6,6,7]
  find out the right min->[2,3,3,5,5,7]
-so you can see element which are already sorted is same in left max and right min which is 2 and 7 else need to be sorted, that is the range*/
+so you can see element which are already sorted is same in left max and right min which is 2 and 7 else need to be sorted, that is the range
+Time Complexity- O(N)
+Space Complexity- O(N)
+*/
 
 class Solution {
 public:
