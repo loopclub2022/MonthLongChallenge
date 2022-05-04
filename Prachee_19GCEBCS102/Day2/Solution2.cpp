@@ -1,3 +1,12 @@
+Appraoch- 
+    1. Traverse through the array twice. 
+    2. For the first time, check and copy all the even elements into a temp array, 
+    3. In the second traversal, check all odd elements and copy them.
+    4. Copy temp array into original array and return it
+    
+Complexity- O(n)
+
+
 class Solution {
 public:
     vector<int> sortArrayByParity(vector<int>& nums) {
