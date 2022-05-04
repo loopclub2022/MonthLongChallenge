@@ -2,6 +2,19 @@
 
 /*************************************************************backspace-string-compare.cpp****************************************************************************/
 
+/*
+APPROACH:: 
+(1) Traverse the string from left to right. 
+(2) Each time check if character is '#' or an alphabet.
+(3) If it is '#' then do it's substring till the backspaced character else add that character to another string.
+(4) Finally check for the equality of both the strings that are formed.
+
+TIME COMPLEXITY::
+O(max(|s|, |t|))
+SPACE COMPLEXITY:
+O(max(|s|, |t|))
+*/
+
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -45,3 +58,16 @@ int main()
 	}
 	return 0;
 }
+
+/**************************************************************************R E S U L T*********************************************************************************
+
+Submission Detail
+114 / 114 test cases passed.
+Status: Accepted
+Runtime: 5 ms
+Memory Usage: 6.6 MB
+Submitted: 3 days, 10 hours ago
+
+***************************************************************************R E S U L T********************************************************************************/
+
+
