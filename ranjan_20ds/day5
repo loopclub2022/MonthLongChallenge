@@ -1,0 +1,45 @@
+ using stack queue implementation is that when we push the element [1,2] 
+ we make 2 as top by doing so calculate size of stack and then store in top of queue front after that push in into queue [2,1]*/
+ time complexity of dequeue of element o(n) and spae complexity is o(n)
+class MyStack {
+public:
+    queue<int> q;
+    MyStack() {
+        
+    }
+    
+    void push(int x) {
+        if(q.empty()){
+            q.push(x);
+            
+        }
+        else{
+            int s=q.size();
+            q.push(x);
+            while(s--){
+                int top =q.front();
+                q.pop();
+                q.push(top);
+            }
+        }
+    }
+    
+    int pop() {
+        int top =q.front();
+            q.pop();
+        return top;
+    }
+    
+    int top() {
+        return q.front();
+    }
+    
+    bool empty() {
+        if(q.empty()){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+};
