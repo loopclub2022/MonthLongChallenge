@@ -1,19 +1,17 @@
 /* Question - https://leetcode.com/problems/implement-stack-using-queues/
-  For Push - 
+  For Push ,empty - 
    Time Complexity - O(1)          Space Complexity - O(1)
   For pop - 
-    Time Complexity - O(n)         Space Complexity - O(1)
+    Time Complexity - O(n)         Space Complexity - O(n)
   For top - 
     Time Complexity - O(n)         Space Complexity - O(1)
-  For empty - 
-    Time Complexity - O(1)         Space Complexity - O(1)
-   Approach - Using a basic LinkedList of java to perform stack operation
+   Approach - Using a basic LinkedList of Queue Interface of java to perform stack operation
               Last In first out
               Adding element on top position and removing from top position as well.
 */
 
 class MyStack {
-    LinkedList<Integer> list;
+    Queue<Integer> list;
     public MyStack() {
        list = new LinkedList<Integer>();
     }
@@ -23,26 +21,28 @@ class MyStack {
     }
     
     public int pop() {
-        int x = list.remove(list.size()-1);
+        int n = list.size()-1;
+        for(int i = 0; i<n;i++)
+        {
+            list.add(list.peek());
+            list.remove();
+        }
+        int x = list.peek();
+        list.remove();
         return x;
     }
     
     public int top() {
-        return list.get(list.size()-1);
+        Iterator iterator = list.iterator();
+        int x = list.peek();
+        while (iterator.hasNext())
+        {
+            x = (Integer)iterator.next();
+        }
+        return x;
     }
     
     public boolean empty() {
-        if(list.size()==0)
-            return true;
-        return false;
+        return list.isEmpty();
     }
 }
-
-/**
- * Your MyStack object will be instantiated and called as such:
- * MyStack obj = new MyStack();
- * obj.push(x);
- * int param_2 = obj.pop();
- * int param_3 = obj.top();
- * boolean param_4 = obj.empty();
- */
