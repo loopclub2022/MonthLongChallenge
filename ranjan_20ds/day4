@@ -1,0 +1,31 @@
+//approach :-
+create a map of taking two int pair .
+//now iterate the loop and find rem is equal to target - present pointer 
+//now check if map[rem]  is already mapped then increament the ans and reduce the frequency other wise increament map of frequency of the present pointer element
+
+//time complexity is 0(n)
+space is o(n)
+
+class Solution {
+public:
+    int maxOperations(vector<int>& nums, int k){
+        unordered_map<int ,int> m;
+        int res=0;
+        for (int i = 0; i < nums.size(); i++)
+        {
+            /* code */
+            int rem=k-nums[i];
+            if(m[rem]){
+                res++;
+                m[rem]--;
+            }
+            else{
+                m[nums[i]]++;
+            }
+        }
+        return res;
+        
+    
+    }
+    
+};

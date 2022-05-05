@@ -1,0 +1,52 @@
+Approach(Single queue)
+1. push operation
+  a. elements inserted from rear side, last inserted element marked as top element (as last pushed in stack is top).
+2. Pop operation
+  a. size of queue maintained as n;
+  While size of queue is greater than 1, repeat b, c.
+  b. front of queue marked as top element, as we can only delete from front in case of queues
+  c. top element pushed into queue, then pop opeartion performed on queue, decrementing size of queue. (effectively, in case of two elements, positions swapped 
+     and last entered element deleted (LIFO).
+  d. queue's front copied into temp, pop operation performed and temp returned (i.e the popped element)
+  
+Time Complexity-
+Push- O(1)
+Pop- O(n)
+
+class MyStack {
+public:
+    queue <int> q;
+    int topElement= 0;
+    //int elementToBeDeleted= 0;
+    MyStack() {
+        
+    }
+    
+    void push(int x) {
+        topElement= x;
+        q.push(x);
+    }
+    
+    int pop() {
+        int n= q.size();
+        while(n>1){
+            topElement= q.front();
+            q.push(topElement);
+            q.pop();
+            n--;
+        }
+        
+        int temp= q.front();
+        q.pop();
+        return temp;
+    }
+    
+    int top() {
+        return topElement;
+    }
+    
+    bool empty() {
+        if(q.empty()) return true;
+        else return false;
+    }
+};

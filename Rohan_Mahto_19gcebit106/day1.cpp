@@ -2,7 +2,10 @@
 /*Given two strings s and t, return true if they are equal when both are typed into empty text editors. '#' means a backspace character
   Input: s = "ab#c", t = "ad#c"
 Output: true
-Explanation: Both s and t become "ac" .*/
+Explanation: Both s and t become "ac".
+
+Time Complexity-O(n)
+space Complexity-O(n) */
 
 class Solution {
 public:
