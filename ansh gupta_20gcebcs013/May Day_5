@@ -1,0 +1,60 @@
+// My Day 5 code is present here.
+
+/****************************************************************implement-stack-using-queues.cpp*********************************************************************/
+
+/*
+APPROACH::
+(1) Using two queues.
+(2) The first queue 'q1' is just for pushing the elements.
+(3) When we have to pop the elements from the queue, we first copy all the element from 'q1' to 'q2' excluding the element that has to be poped.
+(4) The element that has to be poped is stored in variable 'val', which is finally returned.
+(5) top() function uses queue 'q1' so as to print the topmost element.
+(6) As, we keep on pushing and poping the element into 'q1', accordingly we get the result of q1.empty() function, which is then returned.
+
+TIME COMPLEXITY::
+Push/Top/Empty = O(1)
+Pop = O(N)
+
+SPACE COMPLEXITY::
+O(1)
+
+*/
+
+// Paste this section directly into the LeetCode IDE to run.
+class MyStack {
+public:
+    queue<int> q1;
+    
+    void push(int x) {
+        q1.push(x);
+        return;
+    }
+    
+    int pop() {
+        int val = q1.back();
+        queue<int> q2;
+        while(q1.front() != val)
+        {
+            q2.push(q1.front());
+            q1.pop();
+        }
+        q1 = q2;
+        return val;
+    }
+    
+    int top() {
+        return q1.back();
+    }
+    
+    bool empty() {
+        return q1.empty() ? true : false;
+    }
+};
+
+/*********************************************************************************R E S U L T*************************************************************************/
+16 / 16 test cases passed.
+Status: Accepted
+Runtime: 8 ms
+Memory Usage: 6.8 MB
+Submitted: 18 minutes ago
+**********************************************************************************R E S U L T*************************************************************************/
