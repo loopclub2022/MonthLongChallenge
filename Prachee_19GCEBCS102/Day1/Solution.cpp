@@ -1,3 +1,16 @@
+Approach- 
+    1. create two temporary strings
+    2. For string s, 
+        iterate over it and check when it encounters hash, 
+        if temp1 is empty, copy hash into temp1, and increment count
+        if temp1 is not empty, erase last character fro temp1, and decrement count.
+    3. Repeat step 2 with string t and temp2
+    4. compare temp1 and temp2
+        a. return true if they are equal
+        b. else return false
+            
+Complexity- O(n)
+    
 class Solution {
 public:
     bool backspaceCompare(string s, string t) {
