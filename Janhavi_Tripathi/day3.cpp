@@ -1,3 +1,6 @@
+//tc O(n)
+// approach -->store the array size in a vector 'v' sort  the array and compare the array with the vector .
+//if bothe are not equal push the element in dequeue . 
 #include<bits/stdc++.h>
 using namespace std;
 class Solution {
