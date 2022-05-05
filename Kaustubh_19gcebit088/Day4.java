@@ -1,5 +1,20 @@
 //https://leetcode.com/problems/max-number-of-k-sum-pairs/submissions/
 
+// time complexity = O(n)
+// space complexity = O(1)
+
+// approach:
+// first sort the given array
+// then apply binary search kind of approach
+//  maintain a result counter, everytime nums[i]+nums[j]==k:
+//  add 1 to it, and move st pointer one step ahead, and end pointer one step back
+// because we are to remove these elements from the arr, 
+// so removing them from the search space using the start and end pointers is one way to it.
+
+
+
+
+
 
 import java.util.Arrays;
 
@@ -15,38 +30,13 @@ public class Day4 {
         while(i<j)
             if(nums[i]+nums[j] > k) j--;
             else if(nums[i]+nums[j] < k) i++;
-            else {i++;j--;result++;}
+            else {
+                i++;
+                j--;
+                result++;
+            }
         return result;
     }
 
-    static int getans(int[] arr, int key){
-        int[] idx = new int[arr.length];
-        Arrays.fill(idx,0);
 
-        int count = 0;
-        int s = 0,e = arr.length-1;
-        while(s<e){
-            if(idx[s]==0&&idx[e]==0){
-                if(arr[s]+arr[e]==key) {
-                    idx[s] = 1;
-                    idx[e] = 1;
-                    count += 1;
-                }
-
-                else{
-                    s+=1;
-                    e-=1;
-                }
-            }
-
-            if(idx[s]==1){
-                s+=1;
-            }
-            if(idx[e]==1){
-                e-=1;
-            }
-
-        }
-        return count;
-    }
 }

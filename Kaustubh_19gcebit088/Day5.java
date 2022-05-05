@@ -1,5 +1,7 @@
 // https://leetcode.com/problems/implement-stack-using-queues/submissions/
 
+// just using basic syntax
+
 
 class MyStack {
 
