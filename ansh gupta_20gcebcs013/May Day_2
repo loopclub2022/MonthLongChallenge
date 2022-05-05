@@ -2,6 +2,24 @@
 
 /*********************************************************************sort-array-by-parity.cpp************************************************************************/
 
+/*
+APPROACH::
+(1) Use two-pointer approach.
+(2) Traverse the vector using two pointers; low and high.
+(3) Initially 'low' is at 0 while 'high' is at nums.size()-1
+(4) If nums[i] is odd and nums[j] is even then we need to swap
+(5) If both are odd, then we need to do high--, as nums[high] is already at it's correct place.
+(6) If both are even, then we need to do low++, as nums[low] is already at it's correct place.
+(7) If nums[i] is even and nums[j] is odd then we continue by doing low++, high--
+(7) Do this until low >= high.
+(8) Finally, return nums.
+
+TIME COMPLEXITY::
+O(N)
+SPACE COMPLEXITY::
+O(1)
+*/
+
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -47,3 +65,13 @@ int main()
 	}
 	return 0;
 }
+
+/****************************************************************************R E S U L T*******************************************************************************
+285 / 285 test cases passed.
+Status: Accepted
+Runtime: 20 ms
+Memory Usage: 16.3 MB
+Submitted: 2 days, 9 hours ago
+*****************************************************************************R E S U L T******************************************************************************/
+
+

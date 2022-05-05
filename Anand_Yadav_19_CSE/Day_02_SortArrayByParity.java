@@ -1,3 +1,5 @@
+// link: https://leetcode.com/problems/sort-array-by-parity/
+// 905 leetcode
 public class Day_02_SortArrayByParity {
     public static int[] sortArrayByParity(int[] nums) {
 

@@ -1,0 +1,79 @@
+/*My Day 4 Code is present here.*/
+
+/********************************************************************max-number-of-k-sum-pairs.cpp********************************************************************/
+
+/*
+APPROACH::
+(1) Used two-pointers technique to solve.
+(2) Sort the vector nums in ascending order.
+(3) Take two pointers low, high; where low = 0, high = nums.size()-1
+(4) Consider variable 'answer' that stores the maximum number of k sum pairs.
+(4) If nums[low] + nums[high] == k then we have got a pair, therefore increase the value of answer by 1, also do low++, high--.
+(5) If nums[low] + nums[high] > k, then do high-- (obviously, as the sum would increase more than k if we do low++)
+(6) If nums[low] + nums[high] < k, then do low++ (obviously, as the sum would decrease more than k if we high--)
+(7) Continue this process till low < high
+(8) Finally, return answer.
+
+TIME COMPLEXITY::
+O(N), where N = length of vector nums.
+
+SPACE COMPLEXITY::
+O(1)
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution
+{
+public:
+	int maxOperations(vector<int> nums, int k)
+	{
+		int answer = 0;
+		sort(nums.begin(), nums.end());
+		int low = 0, high = nums.size()-1;
+		while(low < high)
+		{
+			if(nums[low]+nums[high] == k)
+			{
+				answer++;
+				low++;
+				high--;
+			}
+			else if(nums[low]+nums[high] > k)
+				high--;
+			else if(nums[low]+nums[high] < k)
+				low++;
+		}
+		return answer;
+	}
+};
+
+/*Do not include this section if running on LeetCode IDE.*/
+
+int main()
+{
+	int t;
+	cin >> t;
+	while(t--)
+	{
+		int n = 0, k = 0;
+		cin>>n>>k;
+		vector<int> nums(n, 0);
+		for(int i = 0; i < n; i++)
+			cin>>nums[i];
+		Solution obj;
+		cout << obj.maxOperations(nums, k);
+		cout << "\n";
+	} 
+	return 0;
+}
+
+/******************************************************************************R E S U L T*****************************************************************************
+51 / 51 test cases passed.
+Status: Accepted
+Runtime: 223 ms
+Memory Usage: 58.1 MB
+Submitted: 3 hours, 18 minutes ago
+*******************************************************************************R E S U L T****************************************************************************/
+
