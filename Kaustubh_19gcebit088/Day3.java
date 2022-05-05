@@ -1,5 +1,16 @@
 // https://leetcode.com/problems/shortest-unsorted-continuous-subarray/submissions/
 
+// time complexity = O(n)
+// space complexity = O(1)
+
+// approach:
+
+// maintain a min and max and compare each element from front and back to these values and update them.
+// if element from start is smaller than max, then assign end to that index
+// if element from end is greater than min, then assign the start index to that index
+// length of resultant will be end - start +1
+
+
 import java.util.Arrays;
 
 public class Day3 {
@@ -19,32 +30,6 @@ public class Day3 {
         }
         return end - beg + 1;
     }
-//    static int getlen(int[] arr){
-//        int[] ans = getidx(arr);
-//        if(ans[0]==-1&&ans[1]==-1) return 0;
-//        else return ans[1]-ans[0]+1;
-//    }
-//
-//    static int[] getidx(int[] arr){
-//        int s = 0, e = arr.length-1;
-//        int[] ans = {-1,-1};
-//        while(s<e){
-//            if(arr[s]>arr[s+1]){
-//                ans[0] = s;
-//                break;
-//            }
-//            s+=1;
-//        }
-//
-//        while(s<e){
-//            if(arr[e]<=arr[e-1]){
-//                ans[1] = e;
-//                break;
-//            }
-//            e-=1;
-//        }
-//
-//        return ans;
-//    }
+
 
 }
