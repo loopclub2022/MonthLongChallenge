@@ -1,4 +1,3 @@
-//Day_1
 class Solution {
 public:
     bool backspaceCompare(string s, string t) {

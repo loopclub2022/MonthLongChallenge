@@ -1,0 +1,77 @@
+// MY DAY 2 CODE IS PRESENT HERE.
+
+/*********************************************************************sort-array-by-parity.cpp************************************************************************/
+
+/*
+APPROACH::
+(1) Use two-pointer approach.
+(2) Traverse the vector using two pointers; low and high.
+(3) Initially 'low' is at 0 while 'high' is at nums.size()-1
+(4) If nums[i] is odd and nums[j] is even then we need to swap
+(5) If both are odd, then we need to do high--, as nums[high] is already at it's correct place.
+(6) If both are even, then we need to do low++, as nums[low] is already at it's correct place.
+(7) If nums[i] is even and nums[j] is odd then we continue by doing low++, high--
+(7) Do this until low >= high.
+(8) Finally, return nums.
+
+TIME COMPLEXITY::
+O(N)
+SPACE COMPLEXITY::
+O(1)
+*/
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+     vector<int> sortArrayByParity(vector<int>& nums) {
+    	int low = 0, high = nums.size()-1;
+    	while(low < high)
+    	{
+    		if(nums[low]%2 != 0  &&  nums[high]%2 == 0)
+    			swap(nums[low], nums[high]);
+    		else if(nums[low]%2 != 0  &&  nums[high]%2 != 0)
+    			high--;
+    		else if(nums[low]%2 == 0  &&  nums[high]%2 == 0)
+    			low++;
+    		else
+    		{
+    			low++;
+    			high--;
+    		}
+    	}
+    	return nums;	
+    }
+};
+
+
+/* Do not include below module if running on LeetCode IDE */
+int main()
+{
+	int t = 0;
+	cin>>t;
+	while(t--)
+	{
+		int n = 0;
+		cin>>n;
+		vector<int> nums(n, 0);
+		for(int i = 0; i < n; i++)
+			cin>>nums[i];
+		Solution ob;
+		nums = ob.sortArrayByParity(nums);
+		for(auto x : nums) cout<<x<<" ";
+		cout << "\n";
+	}
+	return 0;
+}
+
+/****************************************************************************R E S U L T*******************************************************************************
+285 / 285 test cases passed.
+Status: Accepted
+Runtime: 20 ms
+Memory Usage: 16.3 MB
+Submitted: 2 days, 9 hours ago
+*****************************************************************************R E S U L T******************************************************************************/
+
+

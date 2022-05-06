@@ -1,3 +1,11 @@
+// Question - https://leetcode.com/problems/backspace-string-compare/
+
+/* Time Complexity - O(s.length() + t.length())
+    Space Complexity - O(1)
+    Explanation - Traversed both s and t in reverse directions such that the final string without # is produced.
+                  In the process of strings formation whenever strings are seen to be unequal, 
+                  false is returned else true*/
+
 class Solution {
     public boolean backspaceCompare(String s, String t) {
         int n1 = s.length() -1, n2 = t.length() - 1, jumps1 = 0, jumps2=0;

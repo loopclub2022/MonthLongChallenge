@@ -1,0 +1,89 @@
+// MY DAY 3 CODE IS PRESENT HERE.
+
+/****************************************************************shortest-unsorted_continuous_subarray.cpp************************************************************/
+
+/*
+APPROACH::
+(1) Solve this question by comparing the sorted array with the unsorted one.
+(2) Firstly, create a copy of the given array, let's say c_nums.
+(3) Now sort c_nums in ascending order.
+(4) Start traversing c_nums (which is of same length as nums).
+(6) Store the length of shortest-unsorted-array in variable 'length'.
+(5) If the element at ith index of c_nums is same as that of nums then, check if 'length' so far is 0 or not.
+(6) If 0 then do flag = flase, else do flag = true and do counter++
+(7) 'counter' variable is used to keep a track of number of elements that occur in between the shorted-unsorted-continuous-array that we are considering.
+(8) If c_nums[i] != nums[i] then check if flag = flase or true.
+(9) If flase then, do length = length + 1, else do length = length + counter + 1
+(10) Lastly, make counter = 0 and flag = flase and return 'length'.
+
+TIME COMPLEXITY::
+O(N), where N = length of given unsorted array.
+
+SPACE COMPLEXITY::
+O(N), where N = length of given unsorted array.
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution
+{
+public:
+	int solve(vector<int> nums)
+	{
+		vector<int> c_nums = nums;
+		int length = 0, counter = 0;
+		bool flag = false;
+		sort(c_nums.begin(), c_nums.end());
+		for(int i = 0; i < nums.size(); i++)
+		{
+			if(c_nums[i] == nums[i])
+			{
+				if(length == 0)
+					flag = false;
+				else
+				{
+					flag = true;
+					counter++;
+				}
+			}
+			else
+			{
+				length = flag == true ? length + counter + 1 : length + 1;
+				flag = false;
+				counter = 0;
+			}
+		}
+		return length;
+	}
+};
+
+/*Don't include this section if running on LeetCode IDE.*/
+
+int main()
+{
+	int t;
+	cin >> t;
+	while(t--)
+	{
+		int n = 0;
+		cin>>n;
+		vector<int> nums(n, 0);
+		for(int i = 0; i < n; i++)
+			cin>>nums[i];
+		Solution obj;
+		cout<<obj.solve(nums);
+		cout << "\n";
+	} 
+	return 0;
+}
+
+/***************************************************************************R E S U L T********************************************************************************
+307 / 307 test cases passed.
+Status: Accepted
+Runtime: 52 ms
+Memory Usage: 28.2 MB
+Submitted: 1 day, 8 hours ago
+****************************************************************************R E S U L T*******************************************************************************/
+
+
