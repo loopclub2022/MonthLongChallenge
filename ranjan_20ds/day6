@@ -1,0 +1,44 @@
+//we will implement it by using stack push  with count of repeating character  if its equal to
+// target we pop it after that  get the string and push it into ans and reverse it to get result
+//time complexity is o(n) and space complexity is o(n)
+class Solution {
+public:
+    string removeDuplicates(string s, int k) {
+        int  n=s.size();
+        if(n<k){
+            return s;
+        }
+        stack<pair<char ,int>> stack;
+        for (int i = 0; i <n; i++)
+        {
+            /* code */
+            if(stack.empty() || stack.top().first !=s[i]){
+                stack.push({s[i],1});
+            }
+            else{
+                auto prev=stack.top();
+                stack.pop();
+                stack.push({s[i],prev.second+1});
+
+            }
+            if(stack.top().second==k){
+                stack.pop();
+
+            }
+        }
+        string res="";
+        while(!stack.empty()){
+            auto per=stack.top();
+            stack.pop();
+            while (per.second--)
+            {
+                /* code */
+                res.push_back(per.first);
+            }
+            
+        }
+        reverse(res.begin(),res.end());
+        return res;
+        
+    }
+};
