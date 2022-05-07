@@ -1,0 +1,35 @@
+Approach : First we sort the vector then apply the two way pointer i.e.  from beginning and the last element. Starting from the begining
+we will increment and from end we will keep decrementing ,Parallely checking if the sum of element at start and end is equl to the given number 
+if yes increment count.Then return the count c.
+
+class Solution {
+public:
+    int maxOperations(vector<int>& nums, int k) {    
+    sort(nums.begin(),nums.end());
+        int start =0;
+        int end =nums.size()-1,c=0;
+        while(start<end){
+            if(nums[start]+nums[end]>k){
+                end--;
+                continue;
+            }
+            if(nums[start]+nums[end]==k){
+                c++;
+                start++;
+                end--;
+                continue;
+            }
+            
+            if(nums[start]+nums[end]<k){
+                start++;
+                continue;
+            }
+            
+        }
+        
+        return c;
+    }
+};
+
+Time Complexity:O(nlog n)
+Space Complexity:O(1)
