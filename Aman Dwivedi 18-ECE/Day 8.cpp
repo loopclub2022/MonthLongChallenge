@@ -12,8 +12,11 @@ public:
     {
         int n=nestedList.size();
         int ele;
-        vector<NestedInteger> tempList; //fir storing list
-        //while iterating next element can be a integer or a integer list, if integer we take that value ans push it to ans vector, else we recursively call the helper function
+        vector<NestedInteger> tempList; //for storing list
+        
+        //while iterating next element, it can be a integer or a integer list,
+        //if it is a integer we take that value and push it to the ansList vector, else if a list of integers, we recursively call the helper function,
+        //then the magic of recursion happens it solves that part individually. :p
         for(int i=0;i<n;i++)
         {
             if(nestedList[i].isInteger())
@@ -24,21 +27,21 @@ public:
             else
             {
                 tempList=nestedList[i].getList();
-                solve(tempList);
+                solve(tempList); //recursion magic 
             }
         }
     }
     NestedIterator(vector<NestedInteger> &nestedList) {
-        solve(nestedList);
+        solve(nestedList); 
     }
     
     int next() {
-        int ans=ansList[curr]; //check if next element is present or not
+        int ans=ansList[curr]; //simply returns the next element
         curr++;
         return ans;
     }
     
-    bool hasNext() { //check for end
+    bool hasNext() { //check if next element is present or not
         if(curr==ansList.size())
             return false;
         else
