@@ -1,0 +1,101 @@
+// My Day_8 code is here.
+
+/***********************************************************************flatten-nested-list-iterator.cpp**************************************************************/
+
+/*
+APPROACH::
+(1) We are given the interface of the NestedInteger class.
+(2) We first separate all the integers present in NestedList into an integer vector 'v'.
+(3) To separete we do the folowing:
+  (3.1) First accpet an element from the NestedList vector.
+  (3.2) Check that element for integer using the .isInteger function
+  (3.3) If YES then take that integer using .getInteger function then add it to v.
+  (3.4) If NO then pass accept the list using .getList function and pass it to "add_to_v" function.
+  (3.5) Inside "add_to_v" function check if the element inside the list is integer or not using .isInteger function, if YES then add it to vector 'v', else it
+        is surely a list, then recursively call "add_to_v" again for the list.
+(4) Finally, we have created 'v' vector
+(5) Now, inside .hasNext function check if we have reached to the end of the vector 'v'; if YES then return FALSE, else return TRUE.
+(6) On getting a FALSE from step 5 we simply terminate the code, and on getting TRUE we go for next funtion.
+(7) .next function simply returns v[i], where i = current index in consideration.
+
+TIME COMPLEXITY::
+O(N), N = Length of NestedList
+
+SPACE COMPLEXITY::
+O(1)
+*/
+
+/**
+ * // This is the interface that allows for creating nested lists.
+ * // You should not implement it, or speculate about its implementation
+ * class NestedInteger {
+ *   public:
+ *     // Return true if this NestedInteger holds a single integer, rather than a nested list.
+ *     bool isInteger() const;
+ *
+ *     // Return the single integer that this NestedInteger holds, if it holds a single integer
+ *     // The result is undefined if this NestedInteger holds a nested list
+ *     int getInteger() const;
+ *
+ *     // Return the nested list that this NestedInteger holds, if it holds a nested list
+ *     // The result is undefined if this NestedInteger holds a single integer
+ *     const vector<NestedInteger> &getList() const;
+ * };
+ */
+
+class NestedIterator {
+public:
+    vector<int> v;
+    int len, idx;
+   
+    void add_to_v(NestedInteger i)
+    {
+        if(i.isInteger())
+            v.push_back(i.getInteger());
+        else{
+            vector<NestedInteger> ni = i.getList();
+            for(auto y: ni)
+                add_to_v(y);
+        }
+        return;
+    }
+    
+    NestedIterator(vector<NestedInteger> &nestedList) {
+        idx = 0;
+        for(auto i: nestedList)
+        {
+            if(i.isInteger())
+                v.push_back(i.getInteger());
+            else
+            {
+                v = i.getList();
+                len = v.
+            }
+        }
+        len = v.size();
+    }
+    
+    int next() {
+        idx++;
+        return v[idx-1];
+    }
+    
+    bool hasNext() {
+        if(idx == len) return false;
+        else return true;
+    }
+};
+
+/**
+ * Your NestedIterator object will be instantiated and called as such:
+ * NestedIterator i(nestedList);
+ * while (i.hasNext()) cout << i.next();
+ */
+ 
+/********************************************************************************R E S U L T***************************************************************************
+43 / 43 test cases passed.
+Status: Accepted
+Runtime: 26 ms
+Memory Usage: 17.7 MB
+Submitted: 20 hours, 22 minutes ago
+********************************************************************************R E S U L T***************************************************************************/
