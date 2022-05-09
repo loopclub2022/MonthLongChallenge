@@ -1,0 +1,61 @@
+//My Day 9 Code is here.
+
+/***************************************************************letter-combinations-of-a-phone-number.cpp*************************************************************/
+
+/*
+APPROACH::
+(1) First of all we create a map, that contains all the digits mapped to their respective string as per the keypad display of a mobile phone, from 2 to 9.
+(2) Now by using recursion, each time we simply extract a digit from the string 'digits' and store the corresponding string in variable 's'.
+(3) We then set a loop for iterating through the string and in each iteration we recursive call the function func() for the next digit to extract and to update 
+    vector 'v'
+(4) Vector 'v' is a global vector that would store the different values of string 'sof', that gets updated in each recursive call. When there is no more digit 
+    left in the string 'digits' to be accessed then we 'push_back' sof in global vector 'v'.
+(5) Finally we return the vector 'v' from function letterCombinations() to the main() function, and output it.
+
+TIME COMPLEXITY::
+O(3^N), where 3 is the length of string associated with a digit, example:- for 2 it is "abc", for 3 it is "def".
+
+SPACE COMPLEXITY::
+O(3^N), where 3 is the length of string associated with a digit, example:- for 2 it is "abc", for 3 it is "def".
+*/
+
+class Solution {
+public:
+	vector<string> v;
+	void func(string digits, map<int, string> m, int counter, int curr_digit, string sof)
+	{
+		if(counter == 0)
+		{
+			v.push_back(sof);
+			return; 
+		}
+
+		int num = stoi(digits.substr(curr_digit, 1));
+		string s = m[num];;
+		for(int i = 0; i < s.size(); i++)
+			func(digits, m, counter-1, curr_digit+1, sof + s[i]);
+		return;
+
+	}	
+
+     vector<string> letterCombinations(string digits) 
+    {
+    	int counter = digits.size(), curr_digit = 0;
+    	string sof = "";
+    	map<int, string> m = {{2, "abc"}, {3, "def"}, {4, "ghi"}, {5, "jkl"}, {6, "mno"}, {7, "pqrs"}, {8, "tuv"}, {9, "wxyz"}};
+    	if(digits.size() == 0)
+    		return v;
+    	else
+    		func(digits, m, counter, curr_digit, sof);
+    	return v;
+    }
+};
+
+
+/*************************************************************************************R E S U L T**********************************************************************
+25 / 25 test cases passed.
+Status: Accepted
+Runtime: 3 ms
+Memory Usage: 7.9 MB
+Submitted: 2 hours, 6 minutes ago
+**************************************************************************************R E S U L T*********************************************************************/
