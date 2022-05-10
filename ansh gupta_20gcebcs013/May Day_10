@@ -1,0 +1,69 @@
+// My Day_10 code is here.
+
+/******************************************************************combination-sum-iii/submissions.cpp****************************************************************/
+
+/*
+APPROACH::
+(1) Simply use recursion.
+(2) In each recursive call pick an element from 1 to 9.
+(3) Add that element in the sum obatined in the previous recusive calls.
+(4) If this sum exceeds 'n' then return, if it is equal to 'n' then add the elements of the sum (that are a total if 'k' elements stored in 'lsof' vector)
+    into 2-D vector v.
+(5) lsof = list so far :) this vector stores the elements that we are considering for the sum in each recursive call.
+(6) Also, we take a variable 'sum_so_far' that tells us that if the sum increase beyound 'n' then return every time till starting.
+(7) Also, after returning we do lsof.pop_back() and sum_so_far -= i for coming back to are original states before recursion.
+
+TIME COMPLEXITY::
+O(9!), but in reality it is less than O(9!), right now not willing to calculate, may change latter :)
+
+SPACE COMPLEXITY::
+O(9!)
+ */
+ 
+ class Solution
+{
+public:
+	vector<vector<int>> v;
+	void func(int k, int n, int start_from, int sum_till_now, vector<int> lsof)
+	{
+		if(k == 0)
+		{
+			if(sum_till_now == n)
+				v.push_back(lsof);
+			return;
+		}
+
+		for(int i = start_from; i <= 9; i++)
+		{
+			lsof.push_back(i);
+			sum_till_now += i;
+			if(sum_till_now > n)
+				return;
+			func(k-1, n, i+1, sum_till_now, lsof);
+			sum_till_now -= i;
+			lsof.pop_back();
+		}
+		return;
+	}
+
+	vector<vector<int>> combinationSum3(int k, int n) 
+	{
+		int start_from = 1, sum_till_now = 0;
+		vector<int> lsof;
+        func(k, n, start_from, sum_till_now, lsof);
+        return v;
+    }
+};
+
+
+/******************************************************************************R E S U L T*****************************************************************************
+Runtime: 0 ms, faster than 100.00% of C++ online submissions for Combination Sum III.
+Memory Usage: 6.9 MB, less than 20.91% of C++ online submissions for Combination Sum III.
+
+18 / 18 test cases passed.
+Status: Accepted
+Runtime: 0 ms
+Memory Usage: 6.9 MB
+Submitted: 15 minutes ago
+*******************************************************************************R E S U L T****************************************************************************/
+
