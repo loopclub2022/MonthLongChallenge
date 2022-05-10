@@ -1,7 +1,7 @@
 /* Question - https://leetcode.com/problems/combination-sum-iii/
    
-   Time Complexity - O(9!)
-   Space Complexity - O(9!)
+   Time Complexity - O(9^k)
+   Space Complexity - O(k)
    Approach - Backtracking is used, where once every single digit from 1 to 9 is checked weather included or not would result in sum n or not.*/
 
 class Solution {
