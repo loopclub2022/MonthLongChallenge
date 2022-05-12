@@ -1,0 +1,83 @@
+// My Day_12 Code is here
+
+/***************************************************************************permutations-ii.cpp***********************************************************************/
+
+/*
+APPROACH::
+(1) Use recursion
+(2) In each recursive step, set a pivot whose position will never change.
+(3) Recursive call the function for getting diffrent permutations of elements other than pivot element.
+(4) So, that you don't repeat the permutation, I have taken a map 'm' that keep a track of the numbers that i am generating each time, for example:
+if nums = [1, 1, 2] then 
+for 1 as pivot, m = [112:1, 121:1] 
+for 1 as pivot, m = [112:1, 121:1] no change
+for 2 as pivot, m = [112:1, 121:1, 211:1]
+Therefore, we do not repeat the permutations.
+
+TIME COMPLEXITY::
+O(N*log(N)), N = nums.length()
+
+SPACE COMPLEXITY::
+O(N), N = nums.length()
+*/
+
+class Solution
+{
+public:
+	vector<vector<int>> v;
+	vector<int> mega_hash;
+  map<int, int> m;
+    
+  void func(vector<int> nums, vector<int> vsf, vector<int> hash, int num)
+	{
+		if(vsf.size() == nums.size())
+		{
+			if(m.find(num) != m.end()) 
+			    return;
+			else
+			{
+				v.push_back(vsf);
+				m.insert(make_pair(num, 1));
+				return;	
+			}
+		}
+
+		for(int i = 0; i < nums.size(); i++)
+		{
+			if(hash[i] == 1)
+			    continue;
+			else if((vsf.size() == 0  and  mega_hash[10+nums[i]] == 1))
+			    continue;
+			else
+			{
+				if(vsf.size() == 0)
+					mega_hash[10+nums[i]] = 1;
+				vsf.push_back(nums[i]);
+				hash[i] = 1;
+				func(nums, vsf, hash, num*10 + nums[i]);
+				hash[i] = 0;
+				vsf.pop_back();
+			}
+		}
+		return;
+	}
+
+
+	 vector<vector<int>> permuteUnique(vector<int>& nums) 
+	{
+		mega_hash.resize(21, 0);
+		vector<int> vsf;
+		vector<int> hash(8, 0);
+		int num = 0;
+     	func(nums, vsf, hash, num);   
+     	return v;
+    }
+};
+
+
+RESULT:
+33 / 33 test cases passed.
+Status: Accepted
+Runtime: 317 ms
+Memory Usage: 57.8 MB
+Submitted: 10 minutes ago
