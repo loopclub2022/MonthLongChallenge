@@ -1,35 +1,36 @@
-class NestedIterator {
-     vector<int>finals;
-    int p=0;
+class Solution {
 public:
-    
-    void findnested(vector<NestedInteger> &nestedList)
-    {
-        for(int i=0;i<nestedList.size();i++)
+    string removeDuplicates(string s, int k) {
+        stack<pair<char,int>>st;
+        for(auto a:s)
         {
-            if(nestedList[i].isInteger())
+            if(st.empty() or st.top().first!=a)
             {
-                finals.push_back(nestedList[i].getInteger());
+                st.push({a,1});
             }
             else
             {
-                findnested(nestedList[i].getList());
+                st.top().second++;
+                if(st.top().second==k)
+                {
+                    st.pop();
+                }
+                
+                
             }
+            
         }
-    }
-    NestedIterator(vector<NestedInteger> &nestedList) {
-       
-        findnested(nestedList);
-        
-    }
-    
-    int next() {
-        return finals[p++];
-        
-    }
-    
-    bool hasNext() {
-        return p<finals.size();
+        string finals="";
+        while(!st.empty())
+        {
+            for(int i=0;i<st.top().second;i++)
+            {
+                finals+=st.top().first;
+            }
+            st.pop();
+        }
+        reverse(finals.begin(),finals.end());
+        return finals;
         
     }
 };

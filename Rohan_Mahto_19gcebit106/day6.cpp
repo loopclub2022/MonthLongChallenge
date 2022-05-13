@@ -1,36 +1,23 @@
 class Solution {
 public:
-    string removeDuplicates(string s, int k) {
-        stack<pair<char,int>>st;
-        for(auto a:s)
+    bool find132pattern(vector<int>& nums) {
+         int s3 = INT_MIN;
+       int n = nums.size();
+        stack<int>s;
+        for(int i = n-1;i>=0;i--)
         {
-            if(st.empty() or st.top().first!=a)
-            {
-                st.push({a,1});
-            }
+            if(nums[i]<s3)
+                return true;
             else
             {
-                st.top().second++;
-                if(st.top().second==k)
+                while(!s.empty() && nums[i]>s.top())
                 {
-                    st.pop();
+                    s3 = s.top();
+                    s.pop();
                 }
-                
-                
             }
-            
+            s.push(nums[i]);
         }
-        string finals="";
-        while(!st.empty())
-        {
-            for(int i=0;i<st.top().second;i++)
-            {
-                finals+=st.top().first;
-            }
-            st.pop();
-        }
-        reverse(finals.begin(),finals.end());
-        return finals;
-        
+        return false;
     }
 };

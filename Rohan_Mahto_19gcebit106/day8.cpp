@@ -1,44 +1,35 @@
-#include<vector>
-vector<string>vc{
-    "", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv","wxyz"
-} ; 
-class Solution{
-    
-    
-    
+class NestedIterator {
+     vector<int>finals;
+    int p=0;
 public:
-    vector<string>findallcombo(string&s)
+    
+    void findnested(vector<NestedInteger> &nestedList)
     {
-        if(s.length()==0)
+        for(int i=0;i<nestedList.size();i++)
         {
-            vector<string>p;
-            p.push_back("");
-            return p;
-        }
-        char ch=s[0];
-        string z=s.substr(1);
-        vector<string>p=findallcombo(z);
-        string a=vc[ch-'0'];
-        vector<string>finals;
-        for(auto pq:a)
-        {
-            for(auto v:p)
+            if(nestedList[i].isInteger())
             {
-                finals.push_back(pq+v);
+                finals.push_back(nestedList[i].getInteger());
+            }
+            else
+            {
+                findnested(nestedList[i].getList());
             }
         }
-        return finals;
+    }
+    NestedIterator(vector<NestedInteger> &nestedList) {
+       
+        findnested(nestedList);
         
     }
-    vector<string> letterCombinations(string digits) {
-        if(digits.length()==0)
-        {
-            return {};
-        }
-        vector<string>finals=findallcombo(digits);
-        return finals;
+    
+    int next() {
+        return finals[p++];
         
-        
+    }
+    
+    bool hasNext() {
+        return p<finals.size();
         
     }
 };
