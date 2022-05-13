@@ -1,0 +1,75 @@
+//My Day_13 code is here.
+
+/********************************************************populating-next-right-pointers-in-each-node-ii.cpp***********************************************************/
+
+/*
+APPROACH::
+(1) We consider two queues here.
+(2) One I call a 'consumer_q' queue and the other one 'supplier_q' queue.
+(3) The objective of 'consumer_q' is to help us in defining 'next' parameter of the node. This is done in the following manner:
+    (3.1) if suppose consumer_q has elements = [1, 2, 3, 4]
+    (3.2) it picks up the first element as the root node that is '1', now the next of node '1' will have node '2' and node '1' is poped out from the queue.
+    (3.3) Similiarly, next time root node will be '2', now the next of node '2' will be 3 and node '2' is poped out from the queue and this goes on.
+(4) Now once the consumer_q becomes empty by defining the 'next' of all 1,2,3,4 nodes we make it equal to supplier_q.
+(5) Supplier_q, is just to store the children of the nodes that are at same level. This is done to ensure that we don't connect the rightmost node of a level 'i' 
+    with the leftmost node of level 'i+1'.
+(6) Once the consumer_q is empty, supplier_q fills it with the children nodes of the nodes that consumer_q had.
+(7) Again the whole process is repeated, till we don't get an empty supplier_q.
+(8) At the end we return 'ori_root' that refers to the root node of the tree which we had taken in the starting of the process and stored in the variable 'ori_root'.
+
+TIME COMPLEXITY::
+O(N), N = Total number of nodes in the tree
+
+SPACE COMPLEXITY::
+O(N), N = Total number of nodes in the tree
+*/
+
+class Solution {
+public:
+    Node* connect(Node* root) 
+    {
+        if(root == NULL)  // Corner Case
+            return root;
+        
+        Node* ori_root = root;
+        queue<Node*> consumer_q;
+        queue<Node*> supplier_q;
+        
+        supplier_q.push(root);
+        while(!(consumer_q.empty()  &&  supplier_q.empty()))
+        {
+            if(consumer_q.empty())
+            {
+                consumer_q = supplier_q;
+                supplier_q = queue<Node*>();
+            }
+            
+            root = consumer_q.front();
+            consumer_q.pop();
+            
+            if(consumer_q.empty())
+                root->next = NULL;
+            else
+                root->next = consumer_q.front();
+           
+            if(root->left != NULL)
+                supplier_q.push(root->left);
+            if(root->right != NULL)
+                supplier_q.push(root->right);
+        }
+        
+        return ori_root;
+    }
+};
+
+
+/*****************************************************************************R E S U L T******************************************************************************
+Runtime: 27 ms, faster than 16.76% of C++ online submissions for Populating Next Right Pointers in Each Node II.
+Memory Usage: 18.4 MB, less than 5.89% of C++ online submissions for Populating Next Right Pointers in Each Node II.
+
+55 / 55 test cases passed.
+Status: Accepted
+Runtime: 27 ms
+Memory Usage: 18.4 MB
+Submitted: 2 hours, 16 minutes ago
+******************************************************************************R E S U L T*****************************************************************************/
