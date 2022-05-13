@@ -1,0 +1,101 @@
+// My Day 2 Code is here.
+
+/*************************************************************remove-all-adjacent-duplicates-in-string-ii.cpp*********************************************************/
+
+/*
+
+APPROACHH::
+(1) Take two stacks, named s1, s2.
+(2) s1 stack will store the character coming from string 's' one-by-one (like a stack).
+(3) s2 will store the count of character coming one-by-one like a stack in same order as s1.
+(4) if the current character in consideration is present at top then add it to 's1' and it's count to 's2'.
+(5) if current character in consideration is not present at top then add it to 's1' and it's count(=1) to 's2'.
+(6) When the topmost count of 's2' stack is equal to 'k', repeatedly pop from stack 's1' k times, also remove the topmost count from stack 's2' by poping.
+(7) Repeat this process from whole string.
+(8) Finally traverse the stack from top to bottom and store each character in S and finally reverse it and return.
+
+TIME COMPLEXITY::
+O(|s|), |s| = length of string
+
+Space Complexity::
+O(|s|), |s| = length of string
+
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution 
+{
+public:
+    string removeDuplicates(string s, int k)
+    {
+    	stack<char> s1;
+    	stack<int> s2;
+    	string S = ""; 
+
+    	for(int i = 0; i < s.size(); i++)
+    	{
+    		if(s1.empty())
+    		{
+    			s1.push(s[i]);
+    			s2.push(1);
+    		}
+    		else if(s[i] == s1.top())
+    		{
+    			s1.push(s[i]);
+    			s2.top()++;
+    			if(s2.top() == k)
+    			{
+    				for(int j = 1; j <= k; j++)
+    					s1.pop();
+    				s2.pop();
+    			}
+    		}
+    		else
+    		{
+    			s1.push(s[i]);
+    			s2.push(1);
+    		}
+    	}
+
+    	while(!s1.empty())
+    	{
+    		S += s1.top();
+    		s1.pop();
+    	}
+
+    	reverse(S.begin(), S.end());
+    	return S;
+    }
+};
+
+/*Do not include this section if running on LeetCode IDE.*/
+
+int main()
+{
+	int t = 0;
+	cin>>t;
+	while(t--)
+	{
+		string s = "";
+		int k = 0;
+		cin>>s>>k;
+		Solution obj;
+		cout<<obj.removeDuplicates(s, k);
+		cout<<"\n";
+	}
+	return 0;
+}
+
+
+/******************************************************************************R E S U L T*****************************************************************************
+Runtime: 37 ms, faster than 44.91% of C++ online submissions for Remove All Adjacent Duplicates in String II.
+Memory Usage: 10.2 MB, less than 70.45% of C++ online submissions for Remove All Adjacent Duplicates in String II.
+
+20 / 20 test cases passed.
+Status: Accepted
+Runtime: 37 ms
+Memory Usage: 10.2 MB
+Submitted: 15 minutes ago
+*******************************************************************************R E S U L T****************************************************************************/
