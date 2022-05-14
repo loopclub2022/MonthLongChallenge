@@ -1,6 +1,6 @@
 /*
    Question - https://leetcode.com/problems/network-delay-time/
-   Time Complexity - O(n+times.length) , as the Given graph has n nodes i.e n vertex and times.length edges.
+   Time Complexity - O(n!+elog e) , as the Given graph has n nodes i.e n vertex and times.length edges.
    Space Complexity - O(n) 
    
    Approach - A simple dfs algorithm is used, where once the node is visited it is marked true in visited array.
