@@ -1,0 +1,28 @@
+class Solution {
+public:
+
+string removeDuplicates(string s, int k){
+    stack<pair<char,int>> str;
+    
+    int i; 
+    for (i=0; i<s.length(); i++){
+        if(!str.empty() && str.top().first==s[i]){
+           
+                str.top().second++;
+                if(str.top().second==k)
+                    str.pop();
+        }
+            else str.push({s[i],1});
+
+    } 
+    string result= "";
+        while(!str.empty()){
+            for(i=1; i<=str.top().second; i++){
+                result+= str.top().first;
+            }
+            str.pop();
+        }
+        reverse(result.begin(), result.end());
+    return result;
+}
+};
