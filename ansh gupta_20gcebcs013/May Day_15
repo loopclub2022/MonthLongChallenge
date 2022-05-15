@@ -1,0 +1,78 @@
+// My Day_15 Code is here.
+
+/**********************************************************************deepest-leaves-sum.cpp*************************************************************************/
+
+/*
+APPROACH::
+(1) Traverse the tree in preorder manner.
+(2) For each node we keep a track of it's level in variable 'curr_level'.
+(3) Also we have a 'max_level_so_far' variable that keeps a track of the maximum level attained by any leaf.
+(4) All those leaves that are at their maximum levels, their value is added into the 'sum' we got till now.
+(5) If the current level of any node is less than the maximum level we got so far, we just ignore that node.
+(6) But, if the current level comes to be greater than the maximum level then we first make the sum = 0 and add the value of this node to the sum.
+(7) This is done because we need to have the sum of values of all the nodes that are at the deepest level. Therefore, if we find any node that is at a level more 
+    than 'max_level_so_far' then we erase the previous value of sum by making it equal to 0 and add the value of current node to the sum.
+(8) When the whole tree has been traversed we just return to the function 'deepestLeavesSum' and finally return the 'sum'.
+
+TIME COMPLEXITY::
+O(N), N = Number of Node in the tree
+
+SPACE COMPLEXITY::
+O(N), N = Number of Node in the tree
+*/
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+
+class Solution {
+public:
+	int sum = 0;
+	int max_level_so_far = INT_MIN;
+	void func(TreeNode* node, int curr_level)
+	{
+		if(node == NULL)
+			return;
+
+		if(curr_level > max_level_so_far)
+		{
+			sum = node->val;
+			max_level_so_far = curr_level;
+		}
+		else if(curr_level== max_level_so_far)
+		{
+			sum += node->val;
+		}
+		
+		func(node->left, curr_level+1);
+		func(node->right, curr_level+1);
+		return;
+	}
+
+	int deepestLeavesSum(TreeNode* root) 
+	{
+		int curr_level = 1;
+        func(root, curr_level);
+        return sum;
+    }
+};
+
+
+/************************************************************************R E S U L T***********************************************************************************
+Runtime: 136 ms, faster than 42.90% of C++ online submissions for Deepest Leaves Sum.
+Memory Usage: 59.8 MB, less than 53.32% of C++ online submissions for Deepest Leaves Sum.
+
+35 / 35 test cases passed.
+Status: Accepted
+Runtime: 136 ms
+Memory Usage: 59.8 MB
+*************************************************************************R E S U L T**********************************************************************************/
+
