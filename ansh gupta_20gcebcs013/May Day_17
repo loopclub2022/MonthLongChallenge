@@ -1,0 +1,62 @@
+// My Day_17 Code is here
+
+/**********************************************find-a-corresponding-node-of-a-binary-tree-in-a-clone-of-that-tree.cpp*************************************************/
+
+/*
+APPROACH::
+(1) Do the preorder traversal of the original tree and along with it the cloe tree.
+(2) If the node's value is same as that of the target, return the reference of that node from the clone tree.
+
+TIME COMPLEIXTY:
+O(N), N = Total number of nodes in the tree
+
+SPACE COMPLEXITY:
+O(N), N = Total number of nodes in the tree
+*/
+
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+
+class Solution {
+public:
+    TreeNode* getTargetCopy(TreeNode* original, TreeNode* cloned, TreeNode* target) 
+    {
+        if(original == NULL)
+            return NULL;
+        
+        if(original->val == target->val)
+            return cloned;
+        
+        TreeNode* node = new TreeNode();
+        node = getTargetCopy(original->left, cloned->left, target);
+        if(node != NULL  &&  node->val == target->val)
+            return node;
+        else
+        {
+            node = getTargetCopy(original->right, cloned->right, target);
+            if(node != NULL  &&  node->val == target->val)
+                return node;
+            else
+                return NULL;
+        }
+    }
+};
+
+/*********************************************************************************R E S U L T**************************************************************************
+Runtime: 617 ms, faster than 65.55% of C++ online submissions for Find a Corresponding Node of a Binary Tree in a Clone of That Tree.
+Memory Usage: 176 MB, less than 6.61% of C++ online submissions for Find a Corresponding Node of a Binary Tree in a Clone of That Tree.
+
+56 / 56 test cases passed.
+Status: Accepted
+Runtime: 915 ms
+Memory Usage: 175.9 MB
+Submitted: 20 hours, 41 minutes ago
+**********************************************************************************R E S U L T*************************************************************************/
+
