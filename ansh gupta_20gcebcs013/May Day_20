@@ -1,0 +1,60 @@
+// My May Day_20 code is here.
+
+/**********************************************************************unique-paths-ii.cpp****************************************************************************/
+
+/*
+APPROACH::
+(1) Use dynamic programming here.
+(2) Break the probelm into smaller sub-problems.
+(3) Before finding out number of paths for (m-1)th and (n-1)th cell, find the path for consecutive cells after (0,0)th cell.
+(4) A cell (i, j) can be reached in 'x' number of ways, where x =  sum of number of ways (i-1, j)th cell can be reached and (i, j-1)th cell can be reached.
+(5) We use 'dp' 2-D vector so as to save the count of number of ways a cell (i, j) can be reached.
+(5) Finally return the value stored in dp[m-1][n-1].
+
+TIME COMPLEXITY::
+O(M * N)
+
+SPACE COMPLEXITY::
+O(M * N)
+*/
+
+class Solution {
+public:
+    int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) 
+    {
+    	int m = 0, n = 0, row = 0, col = 0;
+    	m = obstacleGrid.size();
+    	n = obstacleGrid[0].size();
+    	vector<vector<int>> dp(m, vector<int>(n, 0));
+    	if(obstacleGrid[0][0] == 0)
+    		dp[0][0] = 1;
+    	else
+    		dp[0][0] = 0;
+    	for(int i = 0; i < m; i++)
+    	{
+    		for(int j = 0; j < n; j++)
+    		{
+    			if(i == 0  &&  j == 0)
+    				continue;
+    			if(obstacleGrid[i][j] == 1)
+    				continue;
+    			if(j-1 >= 0  &&  obstacleGrid[i][j-1] == 0)
+                    dp[i][j] += dp[i][j-1];
+                if(i-1 >= 0  &&  obstacleGrid[i-1][j] == 0)
+                    dp[i][j] += dp[i-1][j];
+    		}
+    	}
+    	return dp[m-1][n-1];
+    }
+};
+
+/*******************************************************************************R E S U L T****************************************************************************
+Runtime: 4 ms, faster than 62.19% of C++ online submissions for Unique Paths II.
+Memory Usage: 7.9 MB, less than 41.40% of C++ online submissions for Unique Paths II.
+
+41 / 41 test cases passed.
+Status: Accepted
+Runtime: 4 ms
+Memory Usage: 7.9 MB
+Submitted: 2 minutes ago
+********************************************************************************R E S U L T***************************************************************************/
