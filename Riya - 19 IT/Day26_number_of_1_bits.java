@@ -24,5 +24,9 @@ public class Solution {
             count++;
         }
         return count;
+        /*
+         Alternate to above approach, there is a function designed in Integer class, Integer.bitCount()
+         return Integer.bitCount(int n);
+        */
     }
 }
