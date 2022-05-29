@@ -1,0 +1,27 @@
+Given an array nums containing n distinct numbers in the range [0, n], return the only number in the range that is missing from the array. 
+
+
+class Solution
+{
+public:
+    int missingNumber(vector<int>& nums)
+    {
+           sort(nums.begin(),nums.end());
+            int n=nums.size();
+            for(int i=0;i<n;i++)
+            {
+                    if(nums[i]!=(i))
+                            return i;
+            }
+            
+      return n;
+     }
+};
+
+Time Complexity
+Since we are using one loop of size n , time complexity is O(n)
+
+Space Complexity
+Space complexity id O(n)
+
+where n is the size of the vector
